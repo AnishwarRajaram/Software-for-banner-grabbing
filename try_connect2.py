@@ -6,6 +6,7 @@ def banner_grab(ip, port, timeout=9):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.settimeout(timeout)
         s.connect((ip, port))
+
         
         
         if int(port) != 80:
@@ -38,6 +39,8 @@ def banner_grab(ip, port, timeout=9):
         return f"Error: {e}"
 
 if __name__ == "__main__":
-    target_ip = "192.168.254.1"
+    target_ip = ""
     target_port = 8443
     print(banner_grab(target_ip, target_port))
+    banner_grab(target_ip, target_port)
+    

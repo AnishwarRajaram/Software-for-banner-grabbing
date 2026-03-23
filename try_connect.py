@@ -34,7 +34,7 @@ def banner_grab(ip, port, message=None, timeout=9):
 
 if __name__ == "__main__":
     message = "GET / HTTP/1.0\r\n\r\n";
-    ip  = "192.168.254.1"
+    ip  = ""
     port = 8443
 
     print(banner_grab(ip,port,message))
