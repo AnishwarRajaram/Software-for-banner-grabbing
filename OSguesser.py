@@ -1,6 +1,45 @@
 from scapy.all import IP,TCP,sr1
 import math
 import sys
+import json
+
+
+def detOSsignature(pkt):
+    if not pkt or not pkt.haslayer(TCP):
+        return None
+    
+    opt_map = {1: 'N', 2: 'M', 3: 'W', 4: 'S', 8: 'T'}
+    options = []
+    for opt in pkt[TCP].options:
+        name = opt_map.get(opt[0], '?')
+        options.append(name)
+    
+    opt_string = ",".join(options)
+    
+    signature = {
+        "TTL": pkt[IP].ttl,
+        "Window": pkt[TCP].window,
+        "Options": opt_string,
+        "DF": 1 if (pkt[IP].flags & 0x02) else 0
+    }
+    
+    return signature
+
+
+def signatureMatch(signature, db_path = "os_signatures.json"):
+    with open(db_path, 'r') as f:
+        db = json.load(f)
+    
+    for entry in db['signatures']:
+        if (signature['Options'] == entry['options'] and 
+            signature['DF'] == entry['df']):
+            return entry['os']
+            
+    return "Unknown OS"
+
+
+
+
 
 def guessOS(ip):
     TTLtoOS = {64: "Linux/Unix/macOS",
@@ -31,6 +70,7 @@ def guessOS(ip):
 
         print("possible OS matches (via ttl): "+TTLtoOS[ttl])
         print("possible OS matches(via rcwnd size): " + (defTCPrcwnd_to_OS[rcwnd] if rcwnd in defTCPrcwnd_to_OS.keys() else "None"))
+        print("possible OS match(through packet IP signature): " + signatureMatch(detOSsignature))
 
         #print(ttl)
         return
