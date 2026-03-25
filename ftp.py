@@ -2,46 +2,41 @@ import socket
 import sys
 import datetime
 
-def getBanner(s):
-    banner = s.recv(2048)
-    return banner.decode(errors="ignore").strip()
+def Probe(s):
+    banner1 = s.recv(2048)    
 
-def userProbe(s):
-    probe = "USER anonymous\r\n"
-    s.sendall(probe.encode())
-    banner = s.recv(2048)
-    return banner.decode(errors="ignore").strip()
-
-def passProbe(s):
-    probe = "PASS anonymous\r\n"
-    s.sendall(probe.encode())
-    banner = s.recv(2048)
-    return banner.decode(errors="ignore").strip()
-
-def helpProbe(s):
-    probe = "HELP\r\n"
-    s.sendall(probe.encode())
-    banner = s.recv(2048)
-    return banner.decode(errors="ignore").strip()
-
-def invalidCommand(s):
-    probe = "FAKECMD\r\n"
-    s.sendall(probe.encode())
-    banner = s.recv(2048)
-    return banner.decode(errors="ignore").strip()
-
-def systProbe(s):
     probe = "SYST\r\n"
     s.sendall(probe.encode())
-    banner = s.recv(2048)
-    return banner.decode(errors="ignore").strip()
+    banner2 = s.recv(2048)
 
-def extraProbe(s):
     probe = "FEAT\r\n"
     s.sendall(probe.encode())
-    banner = s.recv(2048)
-    return banner.decode(errors = "ignore").strip()
+    banner3 = s.recv(2048)
 
+    probe = "USER anonymous\r\n"
+    s.sendall(probe.encode())
+    banner4 = s.recv(2048)
+
+    probe = "PASS anonymous\r\n"
+    s.sendall(probe.encode())
+    banner5 = s.recv(2048)
+
+    probe = "CSID client123\r\n"
+    s.sendall(probe.encode())
+    banner6 = s.recv(2048)
+
+    banners = []
+    banners.append(banner1)
+    banners.append(banner2)
+    banners.append(banner3)
+    banners.append(banner4)
+    banners.append(banner5)
+    banners.append(banner6)
+
+    for b in banners:
+        b.decode(errors = "ignore").strip()
+
+    return banners
 
 if __name__ == "__main__":
     ip = sys.argv[1]
@@ -52,24 +47,18 @@ if __name__ == "__main__":
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((ip, port))
 
-    banner1 = getBanner(s)        # Initial FTP banner
-    banner2 = userProbe(s)        # USER response
-    banner3 = passProbe(s)        # PASS response
-    banner4 = helpProbe(s)        # HELP response
-    banner5 = invalidCommand(s)   # Invalid command response
-    banner6 = systProbe(s)        # OS info (very useful)
-    banner7 = extraProbe(s)       # We can use FEAT or CSID here for more server info
+    # single function for all banner info
+    Banners = Probe(s)
 
     s.close()
 
     # Print results
-    print("Initial Banner:\n", banner1)
-    print("\nUSER Response:\n", banner2)
-    print("\nPASS Response:\n", banner3)
-    print("\nHELP Response:\n", banner4)
-    print("\nInvalid Command Response:\n", banner5)
-    print("\nSYST Response:\n", banner6)
-    print("\nExtra Probe Repsonse:\n" , banner7)
+    print("Initial Banner:\n", Banners[0])
+    print("\nSYST Response:\n", Banners[1])
+    print("\nFEAT Response:\n", Banners[2])
+    print("\nUSER Response:\n", Banners[3])
+    print("\nUSER Response:\n", Banners[4])
+    print("\nCSID Response:\n", Banners[5])
 
     # # Save to file
     # with open("results.txt", "w") as file_handle:
