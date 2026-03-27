@@ -2,6 +2,7 @@ import HTTPEngine as http
 import ftp
 import sys
 import socket
+import OSguesser as osg
 
 
 def multiserver():
@@ -18,8 +19,11 @@ def multiserver():
             port = 21 #(FTP Control port)
             try:
                 sock.connect((ip,port))
-                ftp.Probe(sock)
+                banners = ftp.Probe(sock)
+                for banner in banners:
+                    print(banner)
                 sock.close()
+                osg.guessOS(ip)
             except TimeoutError:
                 print("timeout, server is offline\n")
         
