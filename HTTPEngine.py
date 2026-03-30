@@ -5,6 +5,9 @@ import datetime
 import guessWebServer as WBgs
 import OSguesser as OSgs
 
+
+SESSION = 1
+
 def emptyGET(socket):
     
     probe = (
@@ -96,7 +99,7 @@ def getfromHTTP(ip, protocol = 'HTTP'):
             #print(banner1,banner2,banner3,banner4)
             #print(f"Script name: {sys.argv[0]}")
 
-            with open("results.txt","w") as file_handle:
+            with open(f"results_{SESSION}.txt","w") as file_handle:
                 date = datetime.date.today()
                 file_handle.write(f"date:{date}\n")
                 file_handle.writelines("BANNER1:\n"+banner1+"\n\n\n\n"+"BANNER2:\n"+banner2+"\n\n\n\n"
