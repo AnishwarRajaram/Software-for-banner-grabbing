@@ -40,7 +40,7 @@ def run_probe(ip, port, protocol, probe_func):
     
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.settimeout(5.0) # 5 seconds is plenty for a banner response
+        s.settimeout(5.0) 
         s.connect((ip, port))
         
         target_sock = s
@@ -61,13 +61,13 @@ def getfromHTTP(ip, protocol='HTTP'):
     port = 80 if protocol == "HTTP" else 443
     print(f"[*] Starting scan on {ip}:{port} ({protocol})")
 
-    # Execute all probes independently
+
     banner1 = run_probe(ip, port, protocol, emptyGET)
     banner2 = run_probe(ip, port, protocol, faultyGET)
     banner3 = run_probe(ip, port, protocol, nonExistentVer)
     banner4 = run_probe(ip, port, protocol, OPTIONS)
 
-    # Print Guesses
+   
     print(f"Probe 1 Guess: {WBgs.guess(banner1)}")
     print(f"Probe 2 Guess: {WBgs.guess(banner2)}")
     print(f"Probe 3 Guess: {WBgs.guess(banner3)}")
