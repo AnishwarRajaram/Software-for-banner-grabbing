@@ -598,11 +598,6 @@ class FTPProber:
 
         return self.fingerprint
 
-
-# ──────────────────────────────────────────────
-#  CLI entry-point  (quick manual test)
-# ──────────────────────────────────────────────
-
 if __name__ == "__main__":
     """
     Usage examples:
