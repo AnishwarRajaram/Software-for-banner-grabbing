@@ -1,0 +1,165 @@
+{
+  "web_servers": [
+    {
+      "name": "Apache httpd",
+      "patterns": [
+        "Apache(?:/([\\d.]+))?",
+        "apache"
+      ],
+      "fields": ["server_header", "http_body_normal_get", "http_body_404_get"]
+    },
+    {
+      "name": "Nginx",
+      "patterns": [
+        "nginx(?:/([\\d.]+))?",
+        "Nginx"
+      ],
+      "fields": ["server_header", "http_body_normal_get", "http_body_404_get"]
+    },
+    {
+      "name": "Microsoft IIS",
+      "patterns": [
+        "Microsoft-IIS(?:/([\\d.]+))?",
+        "IIS"
+      ],
+      "fields": ["server_header", "http_body_normal_get"]
+    },
+    {
+      "name": "LiteSpeed",
+      "patterns": [
+        "LiteSpeed",
+        "litespeed"
+      ],
+      "fields": ["server_header"]
+    },
+    {
+      "name": "Caddy",
+      "patterns": [
+        "Caddy"
+      ],
+      "fields": ["server_header"]
+    },
+    {
+      "name": "OpenResty",
+      "patterns": [
+        "openresty(?:/([\\d.]+))?"
+      ],
+      "fields": ["server_header"]
+    },
+    {
+      "name": "Gunicorn",
+      "patterns": [
+        "gunicorn(?:/([\\d.]+))?"
+      ],
+      "fields": ["server_header"]
+    },
+    {
+      "name": "Tornado",
+      "patterns": [
+        "TornadoServer(?:/([\\d.]+))?"
+      ],
+      "fields": ["server_header"]
+    },
+    {
+      "name": "Jetty",
+      "patterns": [
+        "Jetty(?:/([\\d.]+))?"
+      ],
+      "fields": ["server_header"]
+    },
+    {
+      "name": "Tomcat",
+      "patterns": [
+        "Apache-Coyote",
+        "Apache Tomcat(?:/([\\d.]+))?"
+      ],
+      "fields": ["server_header", "http_body_normal_get"]
+    },
+    {
+      "name": "Werkzeug",
+      "patterns": [
+        "Werkzeug(?:/([\\d.]+))?"
+      ],
+      "fields": ["server_header"]
+    },
+    {
+      "name": "Node.js / Express",
+      "patterns": [
+        "Express",
+        "node\\.js"
+      ],
+      "fields": ["server_header", "powered_by"]
+    },
+    {
+      "name": "Cloudflare",
+      "patterns": [
+        "cloudflare"
+      ],
+      "fields": ["server_header"]
+    },
+    {
+      "name": "Amazon S3 / CloudFront",
+      "patterns": [
+        "AmazonS3",
+        "CloudFront"
+      ],
+      "fields": ["server_header"]
+    }
+  ],
+
+  "ftp_servers": [
+    {
+      "name": "vsftpd",
+      "patterns": [
+        "vsFTPd(?:\\s+([\\d.]+))?",
+        "vsftpd"
+      ],
+      "fields": ["ftp_banner", "ftp_software"]
+    },
+    {
+      "name": "ProFTPD",
+      "patterns": [
+        "ProFTPD(?:\\s+([\\d.]+))?",
+        "proftpd"
+      ],
+      "fields": ["ftp_banner", "ftp_software"]
+    },
+    {
+      "name": "Pure-FTPd",
+      "patterns": [
+        "Pure-FTPd",
+        "pure-ftpd"
+      ],
+      "fields": ["ftp_banner", "ftp_software"]
+    },
+    {
+      "name": "FileZilla Server",
+      "patterns": [
+        "FileZilla Server(?:\\s+([\\d.]+))?"
+      ],
+      "fields": ["ftp_banner", "ftp_software"]
+    },
+    {
+      "name": "Microsoft FTP Service",
+      "patterns": [
+        "Microsoft FTP Service"
+      ],
+      "fields": ["ftp_banner", "ftp_software"]
+    },
+    {
+      "name": "wu-ftpd",
+      "patterns": [
+        "wu-([\\d.]+)",
+        "wu-ftpd"
+      ],
+      "fields": ["ftp_banner", "ftp_software"]
+    },
+    {
+      "name": "OpenBSD ftpd",
+      "patterns": [
+        "OpenBSD ftpd"
+      ],
+      "fields": ["ftp_banner", "ftp_software"]
+    }
+  ]
+}
