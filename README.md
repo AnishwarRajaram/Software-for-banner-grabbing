@@ -222,6 +222,6 @@ sudo python3 main.py 192.168.1.0/24 --no-ftp --no-https --no-detail
 ## Disclaimer
 
 This tool is intended for use on networks you own or have explicit permission to test.
-This tool in its current version was co-written by generative AI (claude Sonnet 4.6)
-Pipeline Architecture not credited to the model and open for free use and modifications
+This tool in its current version was co-written by generative AI (claude Sonnet 4.6).
+Pipeline Architecture not credited to the model and open for free use and modifications.
 Suggestions will be appreciated
