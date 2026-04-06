@@ -1,10 +1,10 @@
-# NetProbe
+# PMap
 
 A layered active network fingerprinting tool written in Python.  
-Given a subnet or a single IP, NetProbe discovers live hosts, probes them across multiple protocol layers, and produces a best-guess identification of the **OS**, **web server**, and **FTP server** running on each target — without installing anything on the target machine.
+Given a subnet or a single IP, PMap discovers live hosts, probes them across multiple protocol layers, and produces a best-guess identification of the **OS**, **web server**, and **FTP server** running on each target — without installing anything on the target machine.
 
 > **Requires root** — raw socket operations (Scapy) need `CAP_NET_RAW`.  
-> Tested on Linux (Debian / Ubuntu). Python 3.9+.
+> Tested on Linux (Debian). Python 3.9+.
 
 ---
 
@@ -222,3 +222,6 @@ sudo python3 main.py 192.168.1.0/24 --no-ftp --no-https --no-detail
 ## Disclaimer
 
 This tool is intended for use on networks you own or have explicit permission to test.
+This tool in its current version was co-written by generative AI (claude Sonnet 4.6)
+Pipeline Architecture not credited to the model and open for free use and modifications
+Suggestions will be appreciated
